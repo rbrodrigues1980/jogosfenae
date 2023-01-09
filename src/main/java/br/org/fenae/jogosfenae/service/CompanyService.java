@@ -1,7 +1,7 @@
 package br.org.fenae.jogosfenae.service;
 
-import br.org.fenae.jogosfenae.exception.CompanyDataIntegrityViolationException;
 import br.org.fenae.jogosfenae.exception.CompanyNotFoundException;
+import br.org.fenae.jogosfenae.exception.NoSuchElementFoundException;
 import br.org.fenae.jogosfenae.model.Company;
 import br.org.fenae.jogosfenae.model.dto.CompanyDTO;
 import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
@@ -59,7 +59,7 @@ public class CompanyService {
         try {
             companyRepository.deleteById(companyId);
         } catch (DataIntegrityViolationException e){
-            throw new CompanyDataIntegrityViolationException("Não é possível excluir a entidade!");
+            throw new CompanyNotFoundException("Não é possível excluir a entidade!");
         }
     }
 

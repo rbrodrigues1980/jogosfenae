@@ -4,7 +4,9 @@ import br.org.fenae.jogosfenae.model.Company;
 import br.org.fenae.jogosfenae.model.dto.CompanyDTO;
 import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
 import br.org.fenae.jogosfenae.service.CompanyService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,6 +15,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j(topic = "COMPANY_CONTROLLER")
 @RestController
 @RequestMapping(value = "/api/rest/v1")
 public class CompanyController {
@@ -20,14 +23,14 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @RequestMapping(method = RequestMethod.POST, value = "/company")
     public ResponseEntity<Void> save(@Valid @RequestBody CompanyDTO companyDTO) {
         Company company =  companyService.fromDTOCompany(companyDTO);
-
         companyService.save(company);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/company/{companyId}")
+                .path("/{companyId}")
                 .buildAndExpand(company.getCompanyId())
                 .toUri();
         return ResponseEntity.created(uri).build();
