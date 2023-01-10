@@ -1,7 +1,6 @@
 package br.org.fenae.jogosfenae.service;
 
 import br.org.fenae.jogosfenae.exception.CompanyNotFoundException;
-import br.org.fenae.jogosfenae.exception.NoSuchElementFoundException;
 import br.org.fenae.jogosfenae.model.Company;
 import br.org.fenae.jogosfenae.model.dto.CompanyDTO;
 import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
