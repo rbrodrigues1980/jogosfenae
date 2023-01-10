@@ -29,16 +29,16 @@ public class CompanyService {
 
     @Transactional
     public void save(Company company) {
-        company.setCompanyId(null);
+        company.setId(null);
         companyRepository.save(company);
     }
 
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        return new Company(null, null, companyRequestDTO.getParticipant(), null, null);
+        return new Company( null, companyRequestDTO.getParticipant());
     }
 
     public void update(Company company){
-        Company updateCompany = find(company.getCompanyId());
+        Company updateCompany = find(company.getId());
         updateCompany.setParticipant(company.getParticipant());
         companyRepository.save(updateCompany);
     }

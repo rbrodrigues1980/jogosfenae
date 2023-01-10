@@ -31,7 +31,7 @@ public class CompanyController {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{companyId}")
-                .buildAndExpand(company.getCompanyId())
+                .buildAndExpand(company.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -48,9 +48,10 @@ public class CompanyController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/company/{companyId}")
-    public ResponseEntity<Void> update(@PathVariable Integer companyId, @RequestBody CompanyRequestDTO companyRequestDTO){
+    public ResponseEntity<Void> update(@PathVariable Integer companyId,
+                                       @RequestBody CompanyRequestDTO companyRequestDTO){
         Company company = companyService.updateDTO(companyRequestDTO);
-        company.setCompanyId(companyId);
+        company.setId(companyId);
         companyService.update(company);
         return ResponseEntity.ok().build();
     }

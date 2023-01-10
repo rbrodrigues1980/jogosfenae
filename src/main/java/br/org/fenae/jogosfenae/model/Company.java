@@ -16,12 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "fenae_Company")
-public class Company {
-
-    @Id
-    @Column(name = "companyId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer companyId;
+public class Company extends AbstractEntity{
 
     @Column(name = "companyName", unique = true)
     private String companyName;
@@ -29,16 +24,6 @@ public class Company {
     @Column(name = "participant")
     @NotNull(message = "Campo é obrigatório")
     private Integer participant;
-
-    @Column(name = "createdDateTime")
-    @CreationTimestamp
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime createdDateTime;
-
-    @Column(name = "updatedDateTime")
-    @UpdateTimestamp
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime updatedDateTime;
 
     public void setCompanyName(String companyName) {
         this.companyName = CompanyEnum.toString(companyName);
