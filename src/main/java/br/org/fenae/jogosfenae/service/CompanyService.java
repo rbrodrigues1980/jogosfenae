@@ -2,7 +2,6 @@ package br.org.fenae.jogosfenae.service;
 
 import br.org.fenae.jogosfenae.exception.CompanyNotFoundException;
 import br.org.fenae.jogosfenae.model.Company;
-import br.org.fenae.jogosfenae.model.dto.CompanyDTO;
 import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
 import br.org.fenae.jogosfenae.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +18,36 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    public Company fromDTOCompany(CompanyDTO companyDTO){
+    /*public Company fromDTOCompany(CompanyDTO companyDTO){
         return new Company().builder()
                 .companyName(companyDTO.getCompanyName())
                 .participant(companyDTO.getParticipant())
                 .build();
-    }
+    }*/
 
     @Transactional
-    public void save(Company company) {
+    public Company save(Company company) {
         company.setId(null);
-        companyRepository.save(company);
+        return companyRepository.save(company);
     }
+
+    /*@Transactional
+    public CompanyDTO save(Company company) {
+        company.setCompanyId(null);
+        Company companySaved = companyRepository.save(company);
+        return CompanyDTO.builder()
+                .companyId(companySaved.getCompanyId())
+                .companyName(companySaved.getCompanyName())
+                .participant(companySaved.getParticipant())
+                .build();
+    }*/
 
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        return new Company( null, companyRequestDTO.getParticipant());
+        return new Company(null, null, companyRequestDTO.getParticipant());
     }
 
-    public void update(Company company){
+    public void update(Integer id, Company company){
+        company.setId(id);
         Company updateCompany = find(company.getId());
         updateCompany.setParticipant(company.getParticipant());
         companyRepository.save(updateCompany);

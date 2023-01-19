@@ -1,8 +1,6 @@
 package br.org.fenae.jogosfenae.controller;
 
 import br.org.fenae.jogosfenae.model.Company;
-import br.org.fenae.jogosfenae.model.dto.CompanyDTO;
-import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
 import br.org.fenae.jogosfenae.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,48 +15,50 @@ import java.util.List;
 
 @Slf4j(topic = "COMPANY_CONTROLLER")
 @RestController
-@RequestMapping(value = "/api/rest/v1")
+@RequestMapping(value = "/api/rest/v1/company")
 public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
 
+    /*@ResponseStatus(value = HttpStatus.CREATED)
+    @PostMapping
+    public CompanyDTO save(@Valid @RequestBody Company company) {
+        return companyService.save(company);
+    }*/
+
     @ResponseStatus(value = HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST, value = "/company")
-    public ResponseEntity<Void> save(@Valid @RequestBody CompanyDTO companyDTO) {
-        Company company =  companyService.fromDTOCompany(companyDTO);
+    @PostMapping
+    public ResponseEntity<Void> save(@Valid @RequestBody Company company) {
         companyService.save(company);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{companyId}")
+                .path("/{id}")
                 .buildAndExpand(company.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/company/{companyId}")
-    public ResponseEntity<Company> find(@PathVariable Integer companyId){
-        Company company = companyService.find(companyId);
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> find(@PathVariable Integer id){
+        Company company = companyService.find(id);
         return ResponseEntity.ok().body(company);
     }
 
-    @GetMapping(value = "/company")
+    @GetMapping
     public ResponseEntity<List<Company>> findAll(){
         return ResponseEntity.ok(companyService.findAll());
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/company/{companyId}")
-    public ResponseEntity<Void> update(@PathVariable Integer companyId,
-                                       @RequestBody CompanyRequestDTO companyRequestDTO){
-        Company company = companyService.updateDTO(companyRequestDTO);
-        company.setId(companyId);
-        companyService.update(company);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Company company){
+        companyService.update(id, company);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/company/{companyId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer companyId){
-        companyService.delete(companyId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        companyService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -59,19 +59,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request
      * @return
      */
-    /*
     @ExceptionHandler({ DataIntegrityViolationException.class })
     public ResponseEntity<Object> handleDataIntegrityViolationException(Exception exception, WebRequest request) {
         log.error("Unknown error occurred", exception);
         return buildErrorResponse(exception, "Registro já existente.", HttpStatus.BAD_REQUEST, request );
     }
-     */
-    @ExceptionHandler({ DataIntegrityViolationException.class })
+    /*@ExceptionHandler({ DataIntegrityViolationException.class })
     public ResponseEntity<ExceptionResponse> handleDataIntegrityViolationException(Exception exception, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false));
         log.error("Unknown error occurred", exception);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }
+    }*/
 
     private ResponseEntity<Object> buildErrorResponse(Exception exception, HttpStatus httpStatus, WebRequest request) {
         return buildErrorResponse(exception, exception.getMessage(), httpStatus, request);

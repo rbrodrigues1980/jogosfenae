@@ -2,26 +2,36 @@ package br.org.fenae.jogosfenae.model.dto;
 
 import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompanyDTO {
 
+    @Id
+    @Column(name = "companyId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "companyName", unique = true)
     @NotNull(message = "Campo é obrigatório")
-    private String companyName;
+    private String name;
 
     @NotNull(message = "Campo é obrigatório")
     private Integer participant;
 
-    public void setCompanyName(String companyName) {
+    /*public void setCompanyName(String companyName) {
         this.companyName = CompanyEnum.toString(companyName);
-    }
+    }*/
 
 }

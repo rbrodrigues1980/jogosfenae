@@ -1,9 +1,19 @@
 package br.org.fenae.jogosfenae.model;
 
 import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
-import lombok.*;
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-import javax.persistence.*;
+import lombok.extern.java.Log;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -12,16 +22,22 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "fenae_Company")
+@Log
 public class Company extends AbstractEntity{
 
-    @Column(name = "companyName", unique = true)
-    private String companyName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "participant")
+    @Column(unique = true)
+    @NotNull(message = "Campo é obrigatório")
+    private String name;
+
     @NotNull(message = "Campo é obrigatório")
     private Integer participant;
 
-    public void setCompanyName(String companyName) {
-        this.companyName = CompanyEnum.toString(companyName);
+    public void setName(String name) {
+        log.info("Entrou no método");
+        this.name = CompanyEnum.toString(name);
     }
 }

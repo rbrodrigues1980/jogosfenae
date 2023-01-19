@@ -16,11 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public abstract class AbstractEntity {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Column(name = "createdDateTime")
     @CreationTimestamp
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
@@ -30,4 +25,6 @@ public abstract class AbstractEntity {
     @UpdateTimestamp
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime updatedDateTime;
+
+    //SOLID e desing pattern
 }

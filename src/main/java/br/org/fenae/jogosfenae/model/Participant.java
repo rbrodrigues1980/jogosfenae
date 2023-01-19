@@ -1,6 +1,9 @@
 package br.org.fenae.jogosfenae.model;
 
+import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
+import br.org.fenae.jogosfenae.model.enums.FunctionEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,14 +21,20 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "fenae_Participant")
 public class Participant extends AbstractEntity {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotEmpty(message = "Nome obrigatório")
     private String name;
 
     @NotNull(message = "Data de nascimento obrigatório")
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
     @Column(name = "gender")
@@ -45,7 +54,7 @@ public class Participant extends AbstractEntity {
     @Email
     private String businessEmail;
 
-    @Column(name = "cpf", unique = true)
+    @Column(name = "cpf", unique = false)
     @NotNull(message = "")
     @CPF
     private String cpf;
@@ -62,6 +71,11 @@ public class Participant extends AbstractEntity {
     @NotNull(message = "")
     private String function;
 
+    public void setFunction(String name) {
+        this.function = FunctionEnum.toString(name);
+    }
+
+    // O erro esta aqui, quando tento salvar, nao salva.
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "companyId", nullable = false, foreignKey = @ForeignKey(name = "FK_companyId"))
     private Company company;
