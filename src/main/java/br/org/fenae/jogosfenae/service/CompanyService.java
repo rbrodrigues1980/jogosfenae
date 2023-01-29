@@ -43,7 +43,7 @@ public class CompanyService {
     }*/
 
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        return new Company(null, null, companyRequestDTO.getParticipant());
+        return new Company(null, null, null, null);
     }
 
     public void update(Integer id, Company company){

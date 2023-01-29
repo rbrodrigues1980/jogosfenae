@@ -8,12 +8,7 @@ import lombok.AllArgsConstructor;
 
 import lombok.extern.java.Log;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -34,7 +29,11 @@ public class Company extends AbstractEntity{
     private String name;
 
     @NotNull(message = "Campo é obrigatório")
-    private Integer participant;
+    private Integer participantNumber;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.DETACH)
+    @JoinColumn(name = "id", nullable = false, foreignKey = @ForeignKey(name = "FK_participantId"))
+    private Participant participant;
 
     public void setName(String name) {
         log.info("Entrou no método");

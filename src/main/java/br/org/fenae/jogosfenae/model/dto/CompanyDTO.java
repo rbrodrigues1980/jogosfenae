@@ -28,7 +28,7 @@ public class CompanyDTO {
     private String name;
 
     @NotNull(message = "Campo é obrigatório")
-    private Integer participant;
+    private Integer participantNumber;
 
     /*public void setCompanyName(String companyName) {
         this.companyName = CompanyEnum.toString(companyName);

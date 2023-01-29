@@ -75,8 +75,7 @@ public class Participant extends AbstractEntity {
         this.function = FunctionEnum.toString(name);
     }
 
-    // O erro esta aqui, quando tento salvar, nao salva.
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.DETACH)
     @JoinColumn(name = "companyId", nullable = false, foreignKey = @ForeignKey(name = "FK_companyId"))
     private Company company;
 

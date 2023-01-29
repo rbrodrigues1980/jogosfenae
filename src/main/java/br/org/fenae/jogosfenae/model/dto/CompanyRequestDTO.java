@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyRequestDTO {
 
-    private Integer participant;
+    private Integer participantNumber;
 
 }
