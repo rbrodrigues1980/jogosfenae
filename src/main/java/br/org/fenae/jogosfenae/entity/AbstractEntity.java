@@ -1,4 +1,4 @@
-package br.org.fenae.jogosfenae.model;
+package br.org.fenae.jogosfenae.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

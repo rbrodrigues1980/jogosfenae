@@ -1,6 +1,5 @@
-package br.org.fenae.jogosfenae.model.dto;
+package br.org.fenae.jogosfenae.entity.dto;
 
-import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,7 @@ public class CompanyDTO {
     @Id
     @Column(name = "companyId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer companyId;
 
     @Column(name = "companyName", unique = true)
     @NotNull(message = "Campo é obrigatório")

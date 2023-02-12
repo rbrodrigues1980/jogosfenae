@@ -1,4 +1,4 @@
-package br.org.fenae.jogosfenae.model.enums;
+package br.org.fenae.jogosfenae.entity.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

@@ -1,9 +1,8 @@
-package br.org.fenae.jogosfenae.model;
+package br.org.fenae.jogosfenae.entity;
 
-import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
-import br.org.fenae.jogosfenae.model.enums.FunctionEnum;
+import br.org.fenae.jogosfenae.entity.enums.FunctionEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +25,10 @@ import java.time.LocalDate;
 public class Participant extends AbstractEntity {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "participantId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @JsonProperty("participantId")
+    private Integer participantId;
 
     @NotEmpty(message = "Nome obrigatório")
     private String name;
@@ -75,7 +75,7 @@ public class Participant extends AbstractEntity {
         this.function = FunctionEnum.toString(name);
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "companyId", nullable = false, foreignKey = @ForeignKey(name = "FK_companyId"))
     private Company company;
 

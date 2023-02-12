@@ -1,6 +1,6 @@
 package br.org.fenae.jogosfenae.controller;
 
-import br.org.fenae.jogosfenae.model.Company;
+import br.org.fenae.jogosfenae.entity.Company;
 import br.org.fenae.jogosfenae.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,35 +30,35 @@ public class CompanyController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody Company company) {
-        companyService.save(company);
+        companyService.saveCompany(company);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(company.getId())
+                .path("/{companyId}")
+                .buildAndExpand(company.getCompanyId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Company> find(@PathVariable Integer id){
-        Company company = companyService.find(id);
+    @GetMapping("/{companyId}")
+    public ResponseEntity<Company> find(@PathVariable Integer companyId){
+        Company company = companyService.findByIdCompany(companyId);
         return ResponseEntity.ok().body(company);
     }
 
     @GetMapping
     public ResponseEntity<List<Company>> findAll(){
-        return ResponseEntity.ok(companyService.findAll());
+        return ResponseEntity.ok(companyService.findAllCompany());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Company company){
-        companyService.update(id, company);
+    @PutMapping("/{companyId}")
+    public ResponseEntity<Void> update(@PathVariable Integer companyId, @RequestBody Company company){
+        companyService.updateCompany(companyId, company);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
-        companyService.delete(id);
+    @DeleteMapping("/{companyId}")
+    public ResponseEntity<Void> delete(@PathVariable Integer companyId){
+        companyService.deleteCompany(companyId);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,6 +1,7 @@
-package br.org.fenae.jogosfenae.model;
+package br.org.fenae.jogosfenae.entity;
 
-import br.org.fenae.jogosfenae.model.enums.CompanyEnum;
+import br.org.fenae.jogosfenae.entity.enums.CompanyEnum;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ public class Company extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @JsonProperty("companyId")
+    private Integer companyId;
 
     @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")
@@ -31,9 +33,19 @@ public class Company extends AbstractEntity{
     @NotNull(message = "Campo é obrigatório")
     private Integer participantNumber;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.DETACH)
-    @JoinColumn(name = "id", nullable = false, foreignKey = @ForeignKey(name = "FK_participantId"))
-    private Participant participant;
+    @NotNull(message = "Campo é obrigatório")
+    private Integer presidentNumber;
+
+    @NotNull(message = "Campo é obrigatório")
+    private Integer sportsDirectorNumber;
+
+    @NotNull(message = "Campo é obrigatório")
+    private Integer athleteNumber;
+    @NotNull(message = "Campo é obrigatório")
+    private Integer parathleteNumber;
+
+    @NotNull(message = "Campo é obrigatório")
+    private Integer technicalNumber;
 
     public void setName(String name) {
         log.info("Entrou no método");

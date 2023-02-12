@@ -1,0 +1,15 @@
+SELECT COUNT(*)
+FROM fenae_Participant p
+INNER JOIN fenae_Company c
+ON p.company_id = c.company_Id
+WHERE c.company_Id = p.company_Id
+
+SELECT p.function, COUNT(*) as count
+FROM fenae_Participant p
+INNER JOIN fenae_Company c
+ON p.company_id = c.company_Id
+WHERE c.company_Id = p.company_Id
+GROUP BY p.function
+
+Selecione os participantes de uma apcef apenas com o tipo que foi cadastrado e saber a quantidade de cada
+um dos tipos ja cadastrados e comparar é com numero informado na tabela de Company

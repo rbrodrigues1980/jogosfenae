@@ -1,6 +1,9 @@
 package br.org.fenae.jogosfenae.controller;
 
-import br.org.fenae.jogosfenae.model.Participant;
+import br.org.fenae.jogosfenae.entity.Modality;
+import br.org.fenae.jogosfenae.entity.Participant;
+import br.org.fenae.jogosfenae.exception.CustomErrorType;
+import br.org.fenae.jogosfenae.repository.CompanyRepository;
 import br.org.fenae.jogosfenae.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,22 +21,46 @@ public class ParticipantController {
 
     @Autowired
     private ParticipantService participantService;
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody Participant participant){
-        participantService.save(participant);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/id")
-                .buildAndExpand(participant.getId())
-                .toUri();
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<CustomErrorType> save(@Valid @RequestBody Participant participant, @RequestParam("companyId") Integer companyId){
+        try {
+            participantService.saveParticipant(participant, companyId);
+            URI uri = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/participantId?companyId={companyId}")
+                    .buildAndExpand(participant.getParticipantId())
+                    .toUri();
+            return ResponseEntity.created(uri).build();
+        } catch (Exception e) {
+            return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sua Apcef já atingiu limite de participantes"), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{participantId}")
+    public ResponseEntity<Participant> findByIdParticipant(@PathVariable Integer participantId){
+        Participant participant = participantService.findByIdParticipant(participantId);
+        return ResponseEntity.ok().body(participant);
+    }
+
+    @PutMapping("/{participantId}/{companyId}")
+    public ResponseEntity<Void> updateParticipant(@PathVariable Integer participantId, @RequestBody Participant participant){
+        participantService.updateParticipant(participantId, participant);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
     public ResponseEntity<List<Participant>> findAll(){
         return ResponseEntity.ok(participantService.findAll());
+    }
+
+    @DeleteMapping("/{participantId}")
+    public ResponseEntity<Void> deleteParticipant(@PathVariable Integer participantId){
+        participantService.deleteParticipant(participantId);
+        return ResponseEntity.noContent().build();
     }
 
 }

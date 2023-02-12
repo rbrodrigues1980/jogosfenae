@@ -1,8 +1,8 @@
 package br.org.fenae.jogosfenae.service;
 
 import br.org.fenae.jogosfenae.exception.CompanyNotFoundException;
-import br.org.fenae.jogosfenae.model.Company;
-import br.org.fenae.jogosfenae.model.dto.CompanyRequestDTO;
+import br.org.fenae.jogosfenae.entity.Company;
+import br.org.fenae.jogosfenae.entity.dto.CompanyRequestDTO;
 import br.org.fenae.jogosfenae.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,8 +26,8 @@ public class CompanyService {
     }*/
 
     @Transactional
-    public Company save(Company company) {
-        company.setId(null);
+    public Company saveCompany(Company company) {
+        company.setCompanyId(null);
         return companyRepository.save(company);
     }
 
@@ -43,29 +43,37 @@ public class CompanyService {
     }*/
 
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        return new Company(null, null, null, null);
+        //Company company = new Company();
+        //company.setCompanyId(companyRequestDTO.getParticipantNumber());
+        //return company;
+        return new Company(null, null, null, null, null, null, null, null);
     }
 
-    public void update(Integer id, Company company){
-        company.setId(id);
-        Company updateCompany = find(company.getId());
-        updateCompany.setParticipant(company.getParticipant());
+    public void updateCompany(Integer companyId, Company company){
+        company.setCompanyId(companyId);
+        Company updateCompany = findByIdCompany(company.getCompanyId());
+        updateCompany.setParticipantNumber(company.getParticipantNumber());
+        updateCompany.setPresidentNumber(company.getPresidentNumber());
+        updateCompany.setSportsDirectorNumber(company.getSportsDirectorNumber());
+        updateCompany.setAthleteNumber(company.getAthleteNumber());
+        updateCompany.setParathleteNumber(company.getParathleteNumber());
+        updateCompany.setTechnicalNumber(company.getTechnicalNumber());
         companyRepository.save(updateCompany);
     }
 
-    public Company find(Integer companyId){
+    public Company findByIdCompany(Integer companyId){
         Optional<Company> company = companyRepository.findById(companyId);
         return company.orElseThrow(
                 () -> new CompanyNotFoundException("Entidade não localizada: " + Company.class.getName())
         );
     }
 
-    public List<Company> findAll(){
+    public List<Company> findAllCompany(){
         return companyRepository.findAll();
     }
 
-    public void delete(Integer companyId){
-        find(companyId);
+    public void deleteCompany(Integer companyId){
+        findByIdCompany(companyId);
         try {
             companyRepository.deleteById(companyId);
         } catch (DataIntegrityViolationException e){

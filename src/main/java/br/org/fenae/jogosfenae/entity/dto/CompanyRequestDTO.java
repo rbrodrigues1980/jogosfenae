@@ -1,4 +1,4 @@
-package br.org.fenae.jogosfenae.model.dto;
+package br.org.fenae.jogosfenae.entity.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

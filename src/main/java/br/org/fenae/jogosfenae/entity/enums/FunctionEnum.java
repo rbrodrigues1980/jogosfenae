@@ -1,9 +1,13 @@
-package br.org.fenae.jogosfenae.model.enums;
+package br.org.fenae.jogosfenae.entity.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum FunctionEnum {
-    ATLETA ("ATLETA"), PRESIDENTE ("PRESIDENTE"), DIRETOR_ESPORTE ("Diretor de esporte");
+    PRESIDENTE ("Presidente"),
+    DIRETOR_ESPORTE ("Diretor de esporte"),
+    ATLETA ("Atleta"),
+    PARATLETA ("Paratrela"),
+    TECNICO("Técnico");
 
     private String functionEnum;
 
@@ -25,6 +29,6 @@ public enum FunctionEnum {
                 return locatedFunction.functionEnum;
         }
 
-        throw new IllegalArgumentException("Apcef ou Fenae inválido: " + name);
+        throw new IllegalArgumentException("Tipo não encontrado: " + name);
     }
 }
