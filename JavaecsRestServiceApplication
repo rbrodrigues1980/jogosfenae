@@ -1,0 +1,14 @@
+package com.ecs.javaecs;
+
+import br.com.itau.tokenmanager.configuration.EnableWalletTokenManager;
+import br.com.itau.tokenmanager.enums.WalletType;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@EnableWalletTokenManager(walletType = WalletType.AWS)
+@SpringBootApplication
+public class JavaecsRestServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(JavaecsRestServiceApplication.class, args);
+    }
+}
