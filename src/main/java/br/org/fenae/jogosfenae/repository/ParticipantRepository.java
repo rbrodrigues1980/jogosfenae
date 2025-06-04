@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParticipantRepository extends JpaRepository<Participant, Integer> {
 
-    @Query("SELECT COUNT(*) FROM Participant p JOIN Company c ON p.company.id = c.id WHERE c.id = :companyId")
+    @Query("SELECT COUNT(p) FROM Participant p WHERE p.company.companyId = :companyId")
     Integer findByCompanyId(@Param("companyId") Integer companyId);
 
 }
