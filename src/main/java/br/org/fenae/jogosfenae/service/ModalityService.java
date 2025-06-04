@@ -30,8 +30,8 @@ public class ModalityService {
 
     @Transactional
     public void updateModality(Integer modalityId, Modality modality){
-        modality.setModalityId(modalityId);
-        Modality updateModality = findByIdModality(modality.getModalityId());
+        Modality updateModality = findByIdModality(modalityId);
+        updateModality.setName(modality.getName());
         modalityRepository.save(updateModality);
     }
 
