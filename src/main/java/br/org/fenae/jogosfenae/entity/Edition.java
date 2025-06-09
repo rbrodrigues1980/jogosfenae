@@ -18,9 +18,9 @@ import javax.validation.constraints.NotNull;
 )
 public class Edition extends AbstractEntity {
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private String title;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private String description;
 }

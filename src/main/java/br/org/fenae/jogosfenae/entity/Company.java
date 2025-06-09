@@ -27,24 +27,24 @@ import javax.validation.constraints.NotNull;
 public class Company extends AbstractEntity{
 
     @Column(unique = true)
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private String name;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer participantNumber;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer presidentNumber;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer sportsDirectorNumber;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer athleteNumber;
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer parathleteNumber;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer technicalNumber;
 
     public void setName(String name) {
