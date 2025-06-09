@@ -20,6 +20,7 @@ public class Edition extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("editionId")
+    @Column(name = "editionId")
     private Integer editionId;
 
     @Column(unique = true)
