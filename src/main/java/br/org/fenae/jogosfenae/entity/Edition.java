@@ -1,15 +1,11 @@
 package br.org.fenae.jogosfenae.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Data
 @Entity
 @Builder
 @NoArgsConstructor

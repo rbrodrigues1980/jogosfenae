@@ -18,7 +18,6 @@ public abstract class AbstractEntity {
 
     @Column(name = "createdDateTime")
     @CreationTimestamp
-    // Format dates without milliseconds, e.g. "2024-06-12 17:05:57"
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDateTime;
 
@@ -26,6 +25,4 @@ public abstract class AbstractEntity {
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedDateTime;
-
-    //SOLID e desing pattern
 }
