@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ModalityService {
@@ -19,17 +20,17 @@ public class ModalityService {
 
     @Transactional
     public Modality saveModality(Modality modality){
-        modality.setModalityId(null);
+        modality.setModalityId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return modalityRepository.save(modality);
     }
 
-    public Modality findByIdModality(Integer modalityId){
+    public Modality findByIdModality(String modalityId){
         Optional<Modality> modality = modalityRepository.findById(modalityId);
         return modality.orElseThrow(() -> new ModalityNotFoundExcpetion("Modalidade não localizada: " + Modality.class.getName()));
     }
 
     @Transactional
-    public void updateModality(Integer modalityId, Modality modality){
+    public void updateModality(String modalityId, Modality modality){
         Modality updateModality = findByIdModality(modalityId);
         updateModality.setName(modality.getName());
         modalityRepository.save(updateModality);
@@ -40,7 +41,7 @@ public class ModalityService {
     }
 
     @Transactional
-    public void deleteModality(Integer modalityId){
+    public void deleteModality(String modalityId){
         findByIdModality(modalityId);
         try {
             modalityRepository.deleteById(modalityId);

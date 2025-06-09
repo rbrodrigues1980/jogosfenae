@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -19,8 +17,7 @@ public class CompanyDTO {
 
     @Id
     @Column(name = "companyId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer companyId;
+    private String companyId;
 
     @Column(name = "companyName", unique = true)
     @NotNull(message = "Campo é obrigatório")

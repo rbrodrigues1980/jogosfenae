@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class CompanyService {
 
     @Transactional
     public Company saveCompany(Company company) {
-        company.setCompanyId(null);
+        company.setCompanyId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return companyRepository.save(company);
     }
 
@@ -49,7 +50,7 @@ public class CompanyService {
         return new Company(null, null, null, null, null, null, null, null);
     }
 
-    public void updateCompany(Integer companyId, Company company){
+    public void updateCompany(String companyId, Company company){
         company.setCompanyId(companyId);
         Company updateCompany = findByIdCompany(company.getCompanyId());
         updateCompany.setParticipantNumber(company.getParticipantNumber());
@@ -61,7 +62,7 @@ public class CompanyService {
         companyRepository.save(updateCompany);
     }
 
-    public Company findByIdCompany(Integer companyId){
+    public Company findByIdCompany(String companyId){
         Optional<Company> company = companyRepository.findById(companyId);
         return company.orElseThrow(
                 () -> new CompanyNotFoundException("Entidade não localizada: " + Company.class.getName())
@@ -72,7 +73,7 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public void deleteCompany(Integer companyId){
+    public void deleteCompany(String companyId){
         findByIdCompany(companyId);
         try {
             companyRepository.deleteById(companyId);

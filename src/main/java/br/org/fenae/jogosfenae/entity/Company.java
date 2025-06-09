@@ -22,9 +22,9 @@ import javax.validation.constraints.NotNull;
 public class Company extends AbstractEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("companyId")
-    private Integer companyId;
+    @Column(length = 32)
+    private String companyId;
 
     @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")

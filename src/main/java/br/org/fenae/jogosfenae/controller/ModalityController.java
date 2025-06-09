@@ -42,7 +42,7 @@ public class ModalityController {
     }
 
     @GetMapping("/{modalityId}")
-    public ResponseEntity<Modality> find(@PathVariable Integer modalityId){
+    public ResponseEntity<Modality> find(@PathVariable String modalityId){
         Modality modality = modalityService.findByIdModality(modalityId);
         return ResponseEntity.ok().body(modality);
     }
@@ -53,13 +53,13 @@ public class ModalityController {
     }
 
     @PutMapping("/{modalityId}")
-    public ResponseEntity<Void> updateModality(@PathVariable Integer modalityId, @RequestBody Modality modality){
+    public ResponseEntity<Void> updateModality(@PathVariable String modalityId, @RequestBody Modality modality){
         modalityService.updateModality(modalityId, modality);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{modalityId}")
-    public ResponseEntity<Void> deleteModality(@PathVariable Integer modalityId){
+    public ResponseEntity<Void> deleteModality(@PathVariable String modalityId){
         modalityService.deleteModality(modalityId);
         return ResponseEntity.noContent().build();
     }

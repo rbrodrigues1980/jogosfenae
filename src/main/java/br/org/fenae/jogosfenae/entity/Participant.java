@@ -25,10 +25,9 @@ import java.time.LocalDate;
 public class Participant extends AbstractEntity {
 
     @Id
-    @Column(name = "participantId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("participantId")
-    private Integer participantId;
+    @Column(length = 32)
+    private String participantId;
 
     @NotEmpty(message = "Nome obrigatório")
     private String name;
@@ -70,7 +69,6 @@ public class Participant extends AbstractEntity {
     // "function" is a reserved keyword in MySQL. Rename the column and the
     // field to avoid SQL syntax errors during schema generation.
     @JsonProperty("function")
-    @Column(name = "function_name")
     @NotNull(message = "")
     private String functionName;
 

@@ -26,7 +26,7 @@ public class ParticipantController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<CustomErrorType> save(@Valid @RequestBody Participant participant, @RequestParam("companyId") Integer companyId){
+    public ResponseEntity<CustomErrorType> save(@Valid @RequestBody Participant participant, @RequestParam("companyId") String companyId){
         try {
             participantService.saveParticipant(participant, companyId);
             URI uri = ServletUriComponentsBuilder
@@ -41,13 +41,13 @@ public class ParticipantController {
     }
 
     @GetMapping("/{participantId}")
-    public ResponseEntity<Participant> findByIdParticipant(@PathVariable Integer participantId){
+    public ResponseEntity<Participant> findByIdParticipant(@PathVariable String participantId){
         Participant participant = participantService.findByIdParticipant(participantId);
         return ResponseEntity.ok().body(participant);
     }
 
     @PutMapping("/{participantId}/{companyId}")
-    public ResponseEntity<Void> updateParticipant(@PathVariable Integer participantId, @RequestBody Participant participant){
+    public ResponseEntity<Void> updateParticipant(@PathVariable String participantId, @RequestBody Participant participant){
         participantService.updateParticipant(participantId, participant);
         return ResponseEntity.ok().build();
     }
@@ -58,7 +58,7 @@ public class ParticipantController {
     }
 
     @DeleteMapping("/{participantId}")
-    public ResponseEntity<Void> deleteParticipant(@PathVariable Integer participantId){
+    public ResponseEntity<Void> deleteParticipant(@PathVariable String participantId){
         participantService.deleteParticipant(participantId);
         return ResponseEntity.noContent().build();
     }

@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ParticipantRepository extends JpaRepository<Participant, Integer> {
+public interface ParticipantRepository extends JpaRepository<Participant, String> {
 
     @Query("SELECT COUNT(p) FROM Participant p WHERE p.company.companyId = :companyId")
-    Integer findByCompanyId(@Param("companyId") Integer companyId);
+    Integer findByCompanyId(@Param("companyId") String companyId);
 
 }

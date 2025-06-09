@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j(topic = "PARTICIPANT_SERVICE")
 @Service
@@ -24,7 +25,7 @@ public class ParticipantService {
     private CompanyRepository companyRepository;
 
     @Transactional
-    public Participant saveParticipant(Participant participant, Integer companyId){
+    public Participant saveParticipant(Participant participant, String companyId){
         Company company = companyRepository.findById(companyId).get();
 
         // Conta a quantidade de participantes já cadastrados para a empresa
@@ -35,20 +36,20 @@ public class ParticipantService {
             throw new RuntimeException("Limite de participantes da Apcef atingido");
         }
 
-        // Remove o ID para garantir que seja gerado um novo na inserção
-        participant.setParticipantId(null);
+        // Gera um GUID de 32 posições para o novo participante
+        participant.setParticipantId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         participant.setCompany(company);
         return participantRepository.save(participant);
     }
 
-    public Participant findByIdParticipant(Integer participantId){
+    public Participant findByIdParticipant(String participantId){
         Optional<Participant> participant = participantRepository.findById(participantId);
         return participant.orElseThrow(
                 () -> new ParticipantNotFoundException("Participante não encontrado!" + Participant.class.getName())
         );
     }
 
-    public void updateParticipant(Integer participantId, Participant participant){
+    public void updateParticipant(String participantId, Participant participant){
 
         if (participantId == null || participant == null) {
             throw new IllegalArgumentException("participantId and participant must not be null");
@@ -79,7 +80,7 @@ public class ParticipantService {
         return participantRepository.findAll();
     }
 
-    public void deleteParticipant(Integer participantId){
+    public void deleteParticipant(String participantId){
         findByIdParticipant(participantId);
         try {
             participantRepository.deleteById(participantId);

@@ -20,9 +20,9 @@ import javax.validation.constraints.NotNull;
 public class Modality extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("modalityId")
-    private Integer modalityId;
+    @Column(length = 32)
+    private String modalityId;
 
     @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")
