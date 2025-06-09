@@ -35,7 +35,6 @@ class EditionServiceTest {
     @BeforeEach
     void setUp() {
         sampleEdition = Edition.builder()
-                .editionId("ED1")
                 .title("Title")
                 .description("Description")
                 .build();
@@ -53,7 +52,7 @@ class EditionServiceTest {
 
         Edition saved = editionService.saveEdition(toSave);
 
-        assertNotNull(saved.getEditionId());
+        assertNotNull(saved.getId());
         verify(editionRepository).save(any(Edition.class));
     }
 

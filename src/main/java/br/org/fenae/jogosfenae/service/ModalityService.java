@@ -20,7 +20,7 @@ public class ModalityService {
 
     @Transactional
     public Modality saveModality(Modality modality){
-        modality.setModalityId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+        modality.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return modalityRepository.save(modality);
     }
 

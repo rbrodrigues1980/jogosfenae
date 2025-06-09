@@ -27,17 +27,12 @@ public class ParticipantService {
     @Transactional
     public Participant saveParticipant(Participant participant, String companyId){
         Company company = companyRepository.findById(companyId).get();
-
-        // Conta a quantidade de participantes já cadastrados para a empresa
-        Integer count = participantRepository.findByCompanyId(company.getCompanyId());
-
-        // Verifica se a quantidade de participantes já atingiu o limite permitido para a empresa
+        Integer count = participantRepository.findByCompanyId(company.getId());
         if (count >= company.getParticipantNumber()) {
             throw new RuntimeException("Limite de participantes da Apcef atingido");
         }
 
-        // Gera um GUID de 32 posições para o novo participante
-        participant.setParticipantId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+        participant.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         participant.setCompany(company);
         return participantRepository.save(participant);
     }
@@ -60,8 +55,7 @@ public class ParticipantService {
             throw new ParticipantNotFoundException("Participant with id " + participantId + " not found");
         }
 
-        participant.setParticipantId(participantId);
-        //Participant updateParticipant = findByIdParticipant(participantId);
+        participant.setId(participantId);
         updateParticipant.setName(participant.getName());
         updateParticipant.setBirthDate(participant.getBirthDate());
         updateParticipant.setGender(participant.getGender());
@@ -88,6 +82,5 @@ public class ParticipantService {
             throw new ParticipantNotFoundException("Não foi possível exluir o participante!");
         }
     }
-
 
 }

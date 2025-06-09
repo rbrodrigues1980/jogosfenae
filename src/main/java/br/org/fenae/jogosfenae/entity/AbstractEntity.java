@@ -1,6 +1,7 @@
 package br.org.fenae.jogosfenae.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractEntity {
+
+    @Id
+    @JsonProperty("id")
+    @Column(length = 32)
+    private String id;
 
     @Column(name = "createdDateTime")
     @CreationTimestamp

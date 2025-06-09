@@ -1,6 +1,5 @@
 package br.org.fenae.jogosfenae.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -18,11 +17,6 @@ import javax.validation.constraints.NotNull;
         name = "fenae_Edition"
 )
 public class Edition extends AbstractEntity {
-
-    @Id
-    @JsonProperty("editionId")
-    @Column(length = 32)
-    private String editionId;
 
     @NotNull(message = "Campo é obrigatório")
     private String title;

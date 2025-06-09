@@ -25,7 +25,7 @@ public class EditionController {
         editionService.saveEdition(edition);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{editionId}")
-                .buildAndExpand(edition.getEditionId())
+                .buildAndExpand(edition.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }

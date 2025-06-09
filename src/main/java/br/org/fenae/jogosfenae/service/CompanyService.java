@@ -19,40 +19,19 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    /*public Company fromDTOCompany(CompanyDTO companyDTO){
-        return new Company().builder()
-                .companyName(companyDTO.getCompanyName())
-                .participant(companyDTO.getParticipant())
-                .build();
-    }*/
-
     @Transactional
     public Company saveCompany(Company company) {
-        company.setCompanyId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+        company.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return companyRepository.save(company);
     }
 
-    /*@Transactional
-    public CompanyDTO save(Company company) {
-        company.setCompanyId(null);
-        Company companySaved = companyRepository.save(company);
-        return CompanyDTO.builder()
-                .companyId(companySaved.getCompanyId())
-                .companyName(companySaved.getCompanyName())
-                .participant(companySaved.getParticipant())
-                .build();
-    }*/
-
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        //Company company = new Company();
-        //company.setCompanyId(companyRequestDTO.getParticipantNumber());
-        //return company;
-        return new Company(null, null, null, null, null, null, null, null);
+        return new Company(null, null, null, null, null, null, null);
     }
 
     public void updateCompany(String companyId, Company company){
-        company.setCompanyId(companyId);
-        Company updateCompany = findByIdCompany(company.getCompanyId());
+        company.setId(companyId);
+        Company updateCompany = findByIdCompany(company.getId());
         updateCompany.setParticipantNumber(company.getParticipantNumber());
         updateCompany.setPresidentNumber(company.getPresidentNumber());
         updateCompany.setSportsDirectorNumber(company.getSportsDirectorNumber());

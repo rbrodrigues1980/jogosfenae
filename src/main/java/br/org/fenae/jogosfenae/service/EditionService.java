@@ -20,7 +20,7 @@ public class EditionService {
 
     @Transactional
     public Edition saveEdition(Edition edition) {
-        edition.setEditionId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+        edition.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return editionRepository.save(edition);
     }
 

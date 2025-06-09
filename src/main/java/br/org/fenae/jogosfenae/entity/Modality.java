@@ -21,11 +21,6 @@ import javax.validation.constraints.NotNull;
 @Log
 public class Modality extends AbstractEntity {
 
-    @Id
-    @JsonProperty("modalityId")
-    @Column(length = 32)
-    private String modalityId;
-
     @NotNull(message = "Campo é obrigatório")
     private String name;
 }

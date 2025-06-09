@@ -30,7 +30,7 @@ public class ModalityController {
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/{modalityId}")
-                    .buildAndExpand(modality.getModalityId())
+                    .buildAndExpand(modality.getId())
                     .toUri();
             log.info("Modalidade salva com sucesso: {}", modality.toString());
             return ResponseEntity.created(uri).build();

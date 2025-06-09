@@ -26,11 +26,6 @@ import javax.validation.constraints.NotNull;
 @Log
 public class Company extends AbstractEntity{
 
-    @Id
-    @JsonProperty("companyId")
-    @Column(length = 32)
-    private String companyId;
-
     @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")
     private String name;

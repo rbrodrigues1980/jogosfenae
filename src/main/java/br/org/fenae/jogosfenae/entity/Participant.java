@@ -23,11 +23,6 @@ import java.time.LocalDate;
 @Table(name = "fenae_Participant")
 public class Participant extends AbstractEntity {
 
-    @Id
-    @JsonProperty("participantId")
-    @Column(length = 32)
-    private String participantId;
-
     @NotEmpty(message = "Nome obrigatório")
     private String name;
 

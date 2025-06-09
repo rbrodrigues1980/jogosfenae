@@ -34,7 +34,7 @@ public class CompanyController {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{companyId}")
-                .buildAndExpand(company.getCompanyId())
+                .buildAndExpand(company.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }

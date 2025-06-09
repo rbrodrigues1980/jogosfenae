@@ -1,6 +1,5 @@
 package br.org.fenae.jogosfenae.controller;
 
-import br.org.fenae.jogosfenae.entity.Modality;
 import br.org.fenae.jogosfenae.entity.Participant;
 import br.org.fenae.jogosfenae.exception.CustomErrorType;
 import br.org.fenae.jogosfenae.repository.CompanyRepository;
@@ -32,7 +31,7 @@ public class ParticipantController {
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/participantId?companyId={companyId}")
-                    .buildAndExpand(participant.getParticipantId())
+                    .buildAndExpand(participant.getId())
                     .toUri();
             return ResponseEntity.created(uri).build();
         } catch (Exception e) {
