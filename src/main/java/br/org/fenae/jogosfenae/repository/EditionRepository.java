@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface EditionRepository extends JpaRepository<Edition, Integer> {
+public interface EditionRepository extends JpaRepository<Edition, String> {
     Optional<Edition> findByTitleIgnoreCase(String title);
 }

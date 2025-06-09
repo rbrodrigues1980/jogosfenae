@@ -31,7 +31,7 @@ public class EditionController {
     }
 
     @GetMapping("/{editionId}")
-    public ResponseEntity<Edition> findById(@PathVariable Integer editionId) {
+    public ResponseEntity<Edition> findById(@PathVariable String editionId) {
         return ResponseEntity.ok(editionService.findById(editionId));
     }
 
@@ -46,13 +46,13 @@ public class EditionController {
     }
 
     @PutMapping("/{editionId}")
-    public ResponseEntity<Void> update(@PathVariable Integer editionId, @RequestBody Edition edition) {
+    public ResponseEntity<Void> update(@PathVariable String editionId, @RequestBody Edition edition) {
         editionService.updateEdition(editionId, edition);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{editionId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer editionId) {
+    public ResponseEntity<Void> delete(@PathVariable String editionId) {
         editionService.deleteEdition(editionId);
         return ResponseEntity.noContent().build();
     }

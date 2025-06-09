@@ -40,7 +40,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    public ResponseEntity<Company> find(@PathVariable Integer companyId){
+    public ResponseEntity<Company> find(@PathVariable String companyId){
         Company company = companyService.findByIdCompany(companyId);
         return ResponseEntity.ok().body(company);
     }
@@ -51,13 +51,13 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public ResponseEntity<Void> update(@PathVariable Integer companyId, @RequestBody Company company){
+    public ResponseEntity<Void> update(@PathVariable String companyId, @RequestBody Company company){
         companyService.updateCompany(companyId, company);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{companyId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer companyId){
+    public ResponseEntity<Void> delete(@PathVariable String companyId){
         companyService.deleteCompany(companyId);
         return ResponseEntity.noContent().build();
     }

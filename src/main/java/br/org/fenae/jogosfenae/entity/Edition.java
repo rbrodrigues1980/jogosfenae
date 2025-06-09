@@ -18,10 +18,9 @@ import javax.validation.constraints.NotNull;
 public class Edition extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("editionId")
-    @Column(name = "editionId")
-    private Integer editionId;
+    @Column(length = 32)
+    private String editionId;
 
     @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EditionService {
@@ -19,11 +20,11 @@ public class EditionService {
 
     @Transactional
     public Edition saveEdition(Edition edition) {
-        edition.setEditionId(null);
+        edition.setEditionId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
         return editionRepository.save(edition);
     }
 
-    public Edition findById(Integer editionId) {
+    public Edition findById(String editionId) {
         Optional<Edition> edition = editionRepository.findById(editionId);
         return edition.orElseThrow(() ->
                 new NoSuchElementFoundException("Edição não encontrada: " + Edition.class.getName()));
@@ -40,7 +41,7 @@ public class EditionService {
     }
 
     @Transactional
-    public void updateEdition(Integer editionId, Edition edition) {
+    public void updateEdition(String editionId, Edition edition) {
         Edition update = findById(editionId);
         update.setTitle(edition.getTitle());
         update.setDescription(edition.getDescription());
@@ -48,7 +49,7 @@ public class EditionService {
     }
 
     @Transactional
-    public void deleteEdition(Integer editionId) {
+    public void deleteEdition(String editionId) {
         findById(editionId);
         try {
             editionRepository.deleteById(editionId);
