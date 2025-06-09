@@ -67,14 +67,15 @@ public class Participant extends AbstractEntity {
     @NotNull(message = "")
     private String registration;
 
-    // 'function' is a reserved word in MySQL. Use a different column name
-    // to avoid SQL syntax errors during schema generation.
+    // "function" is a reserved keyword in MySQL. Rename the column and the
+    // field to avoid SQL syntax errors during schema generation.
+    @JsonProperty("function")
     @Column(name = "function_name")
     @NotNull(message = "")
-    private String function;
+    private String functionName;
 
-    public void setFunction(String name) {
-        this.function = FunctionEnum.toString(name);
+    public void setFunctionName(String name) {
+        this.functionName = FunctionEnum.toString(name);
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
