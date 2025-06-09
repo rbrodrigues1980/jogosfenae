@@ -16,10 +16,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
-        name = "fenaeModality",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "FENAE_UK_MODALITY_NAME", columnNames = "name")
-        }
+        name = "fenae_Modality"
 )
 @Log
 public class Modality extends AbstractEntity {
@@ -29,7 +26,6 @@ public class Modality extends AbstractEntity {
     @Column(length = 32)
     private String modalityId;
 
-    @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")
     private String name;
 }

@@ -15,10 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
-        name = "fenaeEdition",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "FENAE_UK_EDITION_TITLE", columnNames = "title")
-        }
+        name = "fenae_Edition"
 )
 public class Edition extends AbstractEntity {
 
@@ -27,7 +24,6 @@ public class Edition extends AbstractEntity {
     @Column(length = 32)
     private String editionId;
 
-    @Column(unique = true)
     @NotNull(message = "Campo é obrigatório")
     private String title;
 

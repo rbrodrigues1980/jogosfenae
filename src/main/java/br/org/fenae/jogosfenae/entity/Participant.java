@@ -20,8 +20,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "fenaeParticipant")
+@Table(name = "fenae_Participant")
 public class Participant extends AbstractEntity {
 
     @Id
@@ -66,8 +65,6 @@ public class Participant extends AbstractEntity {
     @NotNull(message = "")
     private String registration;
 
-    // "function" is a reserved keyword in MySQL. Rename the column and the
-    // field to avoid SQL syntax errors during schema generation.
     @JsonProperty("function")
     @NotNull(message = "")
     private String functionName;
