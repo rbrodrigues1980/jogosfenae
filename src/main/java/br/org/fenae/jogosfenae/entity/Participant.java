@@ -67,7 +67,9 @@ public class Participant extends AbstractEntity {
     @NotNull(message = "")
     private String registration;
 
-    @Column(name = "function")
+    // 'function' is a reserved word in MySQL. Use a different column name
+    // to avoid SQL syntax errors during schema generation.
+    @Column(name = "function_name")
     @NotNull(message = "")
     private String function;
 
