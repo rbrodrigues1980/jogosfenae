@@ -18,13 +18,13 @@ public abstract class AbstractEntity {
 
     @Column(name = "createdDateTime")
     @CreationTimestamp
-    // Accept ISO 8601 date time strings such as "2025-06-09T00:02:55.958Z"
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    // Format dates without milliseconds, e.g. "2024-06-12 17:05:57"
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDateTime;
 
     @Column(name = "updatedDateTime")
     @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedDateTime;
 
     //SOLID e desing pattern
