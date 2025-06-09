@@ -21,6 +21,6 @@ import javax.validation.constraints.NotNull;
 @Log
 public class Modality extends AbstractEntity {
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private String name;
 }

@@ -20,10 +20,10 @@ public class CompanyDTO {
     private String companyId;
 
     @Column(name = "companyName", unique = true)
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private String name;
 
-    @NotNull(message = "Campo é obrigatório")
+    @NotNull(message = "{validation.field.required}")
     private Integer participantNumber;
 
     /*public void setCompanyName(String companyName) {
