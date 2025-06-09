@@ -70,7 +70,7 @@ public class ParticipantService {
         updateParticipant.setCpf(participant.getCpf());
         updateParticipant.setRg(participant.getRg());
         updateParticipant.setRegistration(participant.getRegistration());
-        updateParticipant.setFunction(participant.getFunction());
+        updateParticipant.setFunctionName(participant.getFunctionName());
         updateParticipant.setCompany(participant.getCompany());
         participantRepository.save(updateParticipant);
     }
