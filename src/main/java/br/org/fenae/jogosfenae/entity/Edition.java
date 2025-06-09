@@ -14,7 +14,12 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "fenae_Edition")
+@Table(
+        name = "fenaeEdition",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "FENAE_UK_EDITION_TITLE", columnNames = "title")
+        }
+)
 public class Edition extends AbstractEntity {
 
     @Id

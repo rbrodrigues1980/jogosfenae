@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "fenae_Participant")
+@Table(name = "fenaeParticipant")
 public class Participant extends AbstractEntity {
 
     @Id
