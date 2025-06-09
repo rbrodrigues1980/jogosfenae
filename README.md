@@ -13,7 +13,8 @@ $ git clone https://github.com/rbrodrigues1980/jogosfenae.git
 
 # Abra ou importe o projeto no IntelliJ IDEA (ou uma IDE de sua preferência)
 # Execute VendasApplication
-O servidor iniciará na porta:8080
+O servidor iniciará na porta:8080 usando o perfil **prod**, que conecta ao banco
+de dados MySQL configurado em `application-prod.properties`.
 
 Para acessar a documentação da API acesse <http://localhost:8080/swagger-ui.html>
 
