@@ -20,13 +20,13 @@ import javax.validation.constraints.NotNull;
 @Table(
         name = "fenae_Company",
         uniqueConstraints = {
-                @UniqueConstraint(name = "FENAE_UK_COMPANY_NAME", columnNames = "title")
+                @UniqueConstraint(name = "FENAE_UK_COMPANY_EDITION_TITLE", columnNames = {"title", "editionId"})
         }
 )
 @Log
 public class Company extends AbstractEntity{
 
-    @Column(unique = true)
+    @Column
     @NotNull(message = "{validation.field.required}")
     private String title;
 
