@@ -29,8 +29,8 @@ public class CompanyController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody Company company) {
-        companyService.saveCompany(company);
+    public ResponseEntity<Void> save(@Valid @RequestBody Company company, @RequestParam("editionId") String editionId) {
+        companyService.saveCompany(company, editionId);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{companyId}")
