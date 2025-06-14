@@ -48,7 +48,7 @@ public class Company extends AbstractEntity{
     private Integer technicalNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "editionId", nullable = false, foreignKey = @ForeignKey(name = "FK_editionId"))
+    @JoinColumn(name = "editionId", nullable = false, foreignKey = @ForeignKey(name = "EDICAO_FK_EDICAOID"))
     @NotNull(message = "{validation.field.required}")
     private Edition edition;
 

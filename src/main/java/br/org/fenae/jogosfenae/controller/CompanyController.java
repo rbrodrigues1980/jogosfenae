@@ -21,12 +21,6 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    /*@ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping
-    public CompanyDTO save(@Valid @RequestBody Company company) {
-        return companyService.save(company);
-    }*/
-
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody Company company, @RequestParam("editionId") String editionId) {
