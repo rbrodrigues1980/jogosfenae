@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,36 +29,30 @@ public class Edition extends AbstractEntity {
     private String title;
 
     @Column(name = "startDateTime")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime startDateTime;
 
     @Column(name = "endDateTime")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime endDateTime;
 
     @Column(name = "membershipDate")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "{validation.field.required}")
     private LocalDate membershipDate;
 
     @Column(name = "bornFrom")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bornFrom;
 
     @Schema(description = "Nascidos até")
     @Column(name = "bornUntil")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bornUntil;
 
     @Column(name = "linkExpirationDate")
-    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime linkExpirationDate;
 
