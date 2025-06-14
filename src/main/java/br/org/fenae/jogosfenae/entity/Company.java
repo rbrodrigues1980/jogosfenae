@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Table(
         name = "fenae_Company",
         uniqueConstraints = {
-                @UniqueConstraint(name = "FENAE_UK_COMPANY_NAME", columnNames = "name")
+                @UniqueConstraint(name = "FENAE_UK_COMPANY_NAME", columnNames = "title")
         }
 )
 @Log
