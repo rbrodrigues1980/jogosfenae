@@ -6,12 +6,15 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@br.org.fenae.jogosfenae.validation.EditionValid
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,6 +25,7 @@ import java.time.LocalDateTime;
 public class Edition extends AbstractEntity {
 
     @NotNull(message = "{validation.field.required}")
+    @Size(min = 5, max = 255)
     private String title;
 
     @Column(name = "startDateTime")
@@ -61,6 +65,7 @@ public class Edition extends AbstractEntity {
     private String link;
 
     @NotNull(message = "{validation.field.required}")
+    @Email
     private String email;
 
     @NotNull(message = "{validation.field.required}")
