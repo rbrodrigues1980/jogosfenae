@@ -25,13 +25,6 @@ public class EditionValidator implements ConstraintValidator<EditionValid, Editi
             valid = false;
         }
 
-        LocalDate membership = edition.getMembershipDate();
-        if (membership != null && start != null && membership.isAfter(start.toLocalDate())) {
-            context.buildConstraintViolationWithTemplate("{validation.edition.membership.before.start}")
-                    .addPropertyNode("membershipDate").addConstraintViolation();
-            valid = false;
-        }
-
         LocalDate bornFrom = edition.getBornFrom();
         LocalDate bornUntil = edition.getBornUntil();
         if (bornFrom != null && bornUntil != null && bornFrom.isAfter(bornUntil)) {
