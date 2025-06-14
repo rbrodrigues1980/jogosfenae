@@ -18,17 +18,19 @@ import java.time.LocalDateTime;
 public abstract class AbstractEntity {
 
     @Id
-    @JsonProperty("id")
+    @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     @Column(length = 32)
     private String id;
 
     @Column(name = "createdDateTime")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime createdDateTime;
 
     @Column(name = "updatedDateTime")
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime updatedDateTime;
 }
