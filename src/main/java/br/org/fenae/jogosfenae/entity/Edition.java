@@ -29,12 +29,12 @@ public class Edition extends AbstractEntity {
     private String title;
 
     @Column(name = "startDateTime")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime startDateTime;
 
     @Column(name = "endDateTime")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime endDateTime;
 
@@ -53,7 +53,7 @@ public class Edition extends AbstractEntity {
     private LocalDate bornUntil;
 
     @Column(name = "linkExpirationDate")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime linkExpirationDate;
 
     private String link;
