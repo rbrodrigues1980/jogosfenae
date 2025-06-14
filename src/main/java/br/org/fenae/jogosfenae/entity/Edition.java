@@ -32,41 +32,35 @@ public class Edition extends AbstractEntity {
     @Column(name = "startDateTime")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime startDateTime;
 
     @Column(name = "endDateTime")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @NotNull(message = "{validation.field.required}")
     private LocalDateTime endDateTime;
 
     @Column(name = "membershipDate")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @NotNull(message = "{validation.field.required}")
     private LocalDate membershipDate;
 
     @Column(name = "bornFrom")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate bornFrom;
 
     @Schema(description = "Nascidos até")
     @Column(name = "bornUntil")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate bornUntil;
 
     @Column(name = "linkExpirationDate")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime linkExpirationDate;
 
     private String link;
