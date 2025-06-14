@@ -2,16 +2,14 @@ package br.org.fenae.jogosfenae.entity;
 
 import br.org.fenae.jogosfenae.entity.enums.CompanyEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Builder
@@ -28,7 +26,7 @@ public class Company extends AbstractEntity{
 
     @Column(unique = true)
     @NotNull(message = "{validation.field.required}")
-    private String name;
+    private String title;
 
     @NotNull(message = "{validation.field.required}")
     private Integer participantNumber;
@@ -47,8 +45,8 @@ public class Company extends AbstractEntity{
     @NotNull(message = "{validation.field.required}")
     private Integer technicalNumber;
 
-    public void setName(String name) {
+    public void setTitle(String title) {
         log.info("Entrou no método");
-        this.name = CompanyEnum.toString(name);
+        this.title = CompanyEnum.toString(title);
     }
 }

@@ -31,7 +31,7 @@ public enum CompanyEnum {
                 return locatedCompany.company;
         }
 
-        throw new IllegalArgumentException("Apcef ou Fenae inválido: " + name);
+        throw new IllegalArgumentException("{validation.field.apcef.fenae}" + name);
     }
 
 }

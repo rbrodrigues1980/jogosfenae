@@ -66,6 +66,6 @@ public class Edition extends AbstractEntity {
     @NotNull(message = "{validation.field.required}")
     private String description;
 
-    @Column(name = "current_edition")
+    @Column(name = "currentEdition")
     private Boolean currentEdition;
 }
