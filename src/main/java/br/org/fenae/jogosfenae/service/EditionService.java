@@ -36,6 +36,12 @@ public class EditionService {
                 new NoSuchElementFoundException("Edição não encontrada: " + Edition.class.getName()));
     }
 
+    public Edition findCurrentEdition() {
+        Optional<Edition> edition = editionRepository.findByCurrentEditionTrue();
+        return edition.orElseThrow(() ->
+                new NoSuchElementFoundException("Edição atual não encontrada: " + Edition.class.getName()));
+    }
+
     public List<Edition> findAll() {
         return editionRepository.findAll();
     }
@@ -45,6 +51,7 @@ public class EditionService {
         Edition update = findById(editionId);
         update.setTitle(edition.getTitle());
         update.setDescription(edition.getDescription());
+        update.setCurrentEdition(edition.getCurrentEdition());
         editionRepository.save(update);
     }
 

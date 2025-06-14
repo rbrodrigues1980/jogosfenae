@@ -37,6 +37,7 @@ class EditionServiceTest {
         sampleEdition = Edition.builder()
                 .title("Title")
                 .description("Description")
+                .currentEdition(true)
                 .build();
     }
 
@@ -48,6 +49,7 @@ class EditionServiceTest {
         Edition toSave = Edition.builder()
                 .title("New")
                 .description("NewDesc")
+                .currentEdition(false)
                 .build();
 
         Edition saved = editionService.saveEdition(toSave);
@@ -104,6 +106,25 @@ class EditionServiceTest {
     }
 
     @Test
+    void findCurrentEdition_returnsEditionWhenExists() {
+        when(editionRepository.findByCurrentEditionTrue())
+                .thenReturn(Optional.of(sampleEdition));
+
+        Edition found = editionService.findCurrentEdition();
+
+        assertEquals(sampleEdition, found);
+    }
+
+    @Test
+    void findCurrentEdition_throwsWhenNotFound() {
+        when(editionRepository.findByCurrentEditionTrue())
+                .thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () ->
+                editionService.findCurrentEdition());
+    }
+
+    @Test
     void updateEdition_updatesFields() {
         when(editionRepository.findById("ED1"))
                 .thenReturn(Optional.of(sampleEdition));
@@ -113,12 +134,14 @@ class EditionServiceTest {
         Edition newValues = Edition.builder()
                 .title("Updated")
                 .description("UpdatedDesc")
+                .currentEdition(false)
                 .build();
 
         editionService.updateEdition("ED1", newValues);
 
         assertEquals("Updated", sampleEdition.getTitle());
         assertEquals("UpdatedDesc", sampleEdition.getDescription());
+        assertFalse(sampleEdition.getCurrentEdition());
         verify(editionRepository).save(sampleEdition);
     }
 
@@ -127,7 +150,7 @@ class EditionServiceTest {
         when(editionRepository.findById("UNKNOWN"))
                 .thenReturn(Optional.empty());
 
-        Edition newValues = Edition.builder().title("t").description("d").build();
+        Edition newValues = Edition.builder().title("t").description("d").currentEdition(false).build();
 
         assertThrows(NoSuchElementFoundException.class, () ->
                 editionService.updateEdition("UNKNOWN", newValues));

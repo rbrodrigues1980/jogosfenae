@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface EditionRepository extends JpaRepository<Edition, String> {
     Optional<Edition> findByTitleIgnoreCase(String title);
+
+    Optional<Edition> findByCurrentEditionTrue();
 }
