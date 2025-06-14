@@ -2,8 +2,11 @@ package br.org.fenae.jogosfenae.service;
 
 import br.org.fenae.jogosfenae.exception.CompanyNotFoundException;
 import br.org.fenae.jogosfenae.entity.Company;
+import br.org.fenae.jogosfenae.entity.Edition;
 import br.org.fenae.jogosfenae.entity.dto.CompanyRequestDTO;
 import br.org.fenae.jogosfenae.repository.CompanyRepository;
+import br.org.fenae.jogosfenae.repository.EditionRepository;
+import br.org.fenae.jogosfenae.exception.NoSuchElementFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,15 +21,20 @@ public class CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private EditionRepository editionRepository;
 
     @Transactional
-    public Company saveCompany(Company company) {
+    public Company saveCompany(Company company, String editionId) {
+        Edition edition = editionRepository.findById(editionId)
+                .orElseThrow(() -> new NoSuchElementFoundException("Edi\u00e7\u00e3o n\u00e3o localizada: " + Edition.class.getName()));
         company.setId(UUID.randomUUID().toString().replace("-", "").toUpperCase());
+        company.setEdition(edition);
         return companyRepository.save(company);
     }
 
     public Company updateDTO(CompanyRequestDTO companyRequestDTO){
-        return new Company(null, null, null, null, null, null, null);
+        return new Company(null, null, null, null, null, null, null, null);
     }
 
     public void updateCompany(String companyId, Company company){
@@ -38,6 +46,9 @@ public class CompanyService {
         updateCompany.setAthleteNumber(company.getAthleteNumber());
         updateCompany.setParathleteNumber(company.getParathleteNumber());
         updateCompany.setTechnicalNumber(company.getTechnicalNumber());
+        if (company.getEdition() != null) {
+            updateCompany.setEdition(company.getEdition());
+        }
         companyRepository.save(updateCompany);
     }
 

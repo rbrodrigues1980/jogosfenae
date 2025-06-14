@@ -4,6 +4,8 @@ import br.org.fenae.jogosfenae.entity.enums.CompanyEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import br.org.fenae.jogosfenae.entity.Edition;
+
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
@@ -44,6 +46,11 @@ public class Company extends AbstractEntity{
 
     @NotNull(message = "{validation.field.required}")
     private Integer technicalNumber;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "editionId", nullable = false, foreignKey = @ForeignKey(name = "FK_editionId"))
+    @NotNull(message = "{validation.field.required}")
+    private Edition edition;
 
     public void setTitle(String title) {
         log.info("Entrou no método");
