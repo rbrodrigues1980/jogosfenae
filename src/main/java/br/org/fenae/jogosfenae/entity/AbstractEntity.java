@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public abstract class AbstractEntity {
 
     @Id
-    @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
+    //@JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     @Column(length = 32)
     private String id;
 
