@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,14 @@ class EditionServiceTest {
     void setUp() {
         sampleEdition = Edition.builder()
                 .title("Title")
+                .startDateTime(LocalDateTime.parse("2020-01-01T10:00:00"))
+                .endDateTime(LocalDateTime.parse("2020-01-10T12:00:00"))
+                .membershipDate(LocalDate.parse("2020-01-05"))
+                .bornFrom(LocalDate.parse("1980-01-01"))
+                .bornUntil(LocalDate.parse("2005-12-31"))
+                .linkExpirationDate(LocalDateTime.parse("2020-12-31T23:59:00"))
+                .link("http://example.com")
+                .email("test@example.com")
                 .description("Description")
                 .currentEdition(true)
                 .build();
@@ -133,6 +143,14 @@ class EditionServiceTest {
 
         Edition newValues = Edition.builder()
                 .title("Updated")
+                .startDateTime(LocalDateTime.parse("2021-02-01T09:00:00"))
+                .endDateTime(LocalDateTime.parse("2021-02-10T18:00:00"))
+                .membershipDate(LocalDate.parse("2021-02-05"))
+                .bornFrom(LocalDate.parse("1985-01-01"))
+                .bornUntil(LocalDate.parse("2010-12-31"))
+                .linkExpirationDate(LocalDateTime.parse("2021-12-31T23:00:00"))
+                .link("http://updated.com")
+                .email("upd@example.com")
                 .description("UpdatedDesc")
                 .currentEdition(false)
                 .build();
@@ -140,6 +158,14 @@ class EditionServiceTest {
         editionService.updateEdition("ED1", newValues);
 
         assertEquals("Updated", sampleEdition.getTitle());
+        assertEquals(LocalDateTime.parse("2021-02-01T09:00:00"), sampleEdition.getStartDateTime());
+        assertEquals(LocalDateTime.parse("2021-02-10T18:00:00"), sampleEdition.getEndDateTime());
+        assertEquals(LocalDate.parse("2021-02-05"), sampleEdition.getMembershipDate());
+        assertEquals(LocalDate.parse("1985-01-01"), sampleEdition.getBornFrom());
+        assertEquals(LocalDate.parse("2010-12-31"), sampleEdition.getBornUntil());
+        assertEquals(LocalDateTime.parse("2021-12-31T23:00:00"), sampleEdition.getLinkExpirationDate());
+        assertEquals("http://updated.com", sampleEdition.getLink());
+        assertEquals("upd@example.com", sampleEdition.getEmail());
         assertEquals("UpdatedDesc", sampleEdition.getDescription());
         assertFalse(sampleEdition.getCurrentEdition());
         verify(editionRepository).save(sampleEdition);
