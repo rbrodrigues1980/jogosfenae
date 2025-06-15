@@ -50,6 +50,14 @@ public class EditionService {
     public void updateEdition(String editionId, Edition edition) {
         Edition update = findById(editionId);
         update.setTitle(edition.getTitle());
+        update.setStartDateTime(edition.getStartDateTime());
+        update.setEndDateTime(edition.getEndDateTime());
+        update.setMembershipDate(edition.getMembershipDate());
+        update.setBornFrom(edition.getBornFrom());
+        update.setBornUntil(edition.getBornUntil());
+        update.setLinkExpirationDate(edition.getLinkExpirationDate());
+        update.setLink(edition.getLink());
+        update.setEmail(edition.getEmail());
         update.setDescription(edition.getDescription());
         update.setCurrentEdition(edition.getCurrentEdition());
         editionRepository.save(update);
